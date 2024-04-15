@@ -203,12 +203,24 @@ namespace DocSumServices
 
         public async Task<ConversationModel> UpdateConversation(string id, string userprompt)
         {
-            var botreply = "hiiii";
             ConversationModel conversation = await _docSumRepo.GetConversation(id);
+            var botreply = await GenerateBotReply(userprompt, conversation.Pages[0], conversation.Conv);
             // Append the new user prompt and bot reply to the conversation.conv string
             conversation.Conv += $"UserPrompt: {userprompt};BotReply: {botreply};";
             await _docSumRepo.UpdateConversation(id, conversation);
             return conversation;
+        }
+        private async Task<string> GenerateBotReply(string userPrompt, string content, string previousConversation)
+        {
+            // Concatenate user prompt, content, and previous conversation for context
+            string context = $"Here is a document content : {content}\n\n Here is previous conversation in context of content : \"{previousConversation}\"\n\n  Now continue the conversation, by replying to User Prompt : \"{userPrompt}\" ";
+            // Call Azure's generative AI (GPT) service to generate a reply
+
+
+            // Retrieve generated reply from the analysis result
+            // Assuming the generated reply is stored in a property called 'GeneratedReply'
+            string generatedReply = "";
+            return generatedReply;
         }
     }
 }
