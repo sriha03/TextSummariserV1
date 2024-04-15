@@ -3,8 +3,11 @@
     "",
     "\\DocSum",
     "\\DocSum\\DocSum",
-    "\\DocSum\\DocSum\\Controllers"
+    "\\DocSum\\DocSumRepo",
+    "\\DocSum\\DocSumServices",
+    "\\DocSum\\DocSum\\Controllers",
+    "\\DocSum\\TextSummarizer"
   ],
-  "SelectedNode": "\\DocSum\\DocSum\\Controllers\\DocSumController.cs",
+  "SelectedNode": "\\DocSum\\DocSumRepo",
   "PreviewInSolutionExplorer": false
 }

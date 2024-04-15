@@ -14,7 +14,26 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocSumServices", "DocSumSer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "common", "common\common.csproj", "{9C756C71-746E-4C26-8444-6D0096EB5CDB}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "docsumwebapp", "DocSumWebApp\docsumwebapp.esproj", "{B0FC56BE-58D2-498D-ABF9-65F93A26D632}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TextSummarizer", "TextSummarizer\", "{ABFAF8C2-ED68-4154-9A7B-A8C6E3C1581D}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_60159"
+		Debug.AspNetCompiler.PhysicalPath = "TextSummarizer\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60159\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_60159"
+		Release.AspNetCompiler.PhysicalPath = "TextSummarizer\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_60159\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "60159"
+		SlnRelativePath = "TextSummarizer\"
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,12 +57,10 @@ Global
 		{9C756C71-746E-4C26-8444-6D0096EB5CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C756C71-746E-4C26-8444-6D0096EB5CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C756C71-746E-4C26-8444-6D0096EB5CDB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0FC56BE-58D2-498D-ABF9-65F93A26D632}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0FC56BE-58D2-498D-ABF9-65F93A26D632}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0FC56BE-58D2-498D-ABF9-65F93A26D632}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{B0FC56BE-58D2-498D-ABF9-65F93A26D632}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0FC56BE-58D2-498D-ABF9-65F93A26D632}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0FC56BE-58D2-498D-ABF9-65F93A26D632}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{ABFAF8C2-ED68-4154-9A7B-A8C6E3C1581D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFAF8C2-ED68-4154-9A7B-A8C6E3C1581D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABFAF8C2-ED68-4154-9A7B-A8C6E3C1581D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABFAF8C2-ED68-4154-9A7B-A8C6E3C1581D}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
