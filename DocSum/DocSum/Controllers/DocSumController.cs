@@ -3,6 +3,11 @@ using Microsoft.AspNetCore.Http;
 using DocSumServices;
 using sun.swing;
 using common.model;
+using System.Collections.Generic;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.text.pdf.parser;
+using System.Text;
 
 namespace DocSumController.Controllers
 {
@@ -46,5 +51,63 @@ namespace DocSumController.Controllers
         {
             return await _docSumService.UpdateConversation(id, userprompt);
         }
+        [HttpPost("ExtractSubtopics")]
+        public async Task<IActionResult> ExtractSubtopics(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded");
+            }
+            MemoryStream memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream);
+            byte[] fileBytes = memoryStream.ToArray();
+
+            // Extract subtopics using iTextSharp
+            List<string> extractedSubtopics = ExtractSubtopicsFromPdf(fileBytes);
+
+            return Ok(new { subtopics = extractedSubtopics });
+        }
+
+        private List<string> ExtractSubtopicsFromPdf(byte[] pdfBytes)
+        {
+            List<string> extractedSubtopics = new List<string>();
+            PdfReader reader = null;
+
+            try
+            {
+                reader = new PdfReader(pdfBytes);
+
+                for (int i = 1; i <= reader.NumberOfPages; i++)
+                {
+                    ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
+                    string pageText = PdfTextExtractor.GetTextFromPage(reader, i, strategy);
+
+                    foreach (string line in pageText.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))
+                    {
+                        if (IsPotentialSubtopic(line))
+                        {
+                            extractedSubtopics.Add(line.Trim());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error extracting subtopics: {ex.Message}");
+            }
+            finally
+            {
+                reader?.Close();
+            }
+
+            return extractedSubtopics;
+        }
+
+        private static bool IsPotentialSubtopic(string line)
+        {
+            // Adjust these criteria based on your specific needs
+            return line == line.ToUpper() || line.StartsWith("*") || line.StartsWith("-") || line.Count(Char.IsWhiteSpace) <= 2;
+        }
+
     }
 }
