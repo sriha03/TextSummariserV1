@@ -43,6 +43,26 @@ namespace DocSumRepository
 
             return conversations;
         }
+        public async Task<List<ConversationModel>> GetConversationAll()
+        {
+            var container = _cosmosClient.GetContainer(DatabaseId, ContainerId);
+
+            var query = "SELECT * FROM c";
+            var queryDefinition = new QueryDefinition(query);
+            var conversations = new List<ConversationModel>();
+
+            var resultSetIterator = container.GetItemQueryIterator<ConversationModel>(queryDefinition);
+
+            while (resultSetIterator.HasMoreResults)
+            {
+                var currentResultSet = await resultSetIterator.ReadNextAsync();
+                conversations.AddRange(currentResultSet);
+            }
+
+            return conversations;
+        }
+
+
 
         public string SaveDocument(byte[] documentData, string fileName)
         {

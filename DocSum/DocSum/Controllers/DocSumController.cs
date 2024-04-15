@@ -46,6 +46,11 @@ namespace DocSumController.Controllers
         {
             return await _docSumService.GetConversation(id);
         }
+        [HttpPost("GetConverstionAll")]
+        public async Task<ActionResult<List<ConversationModel>>> GetConversationAll()
+        {
+            return await _docSumService.GetConversationAll();
+        }
         [HttpPost("UpdateConversation")]
         public async Task<ActionResult<ConversationModel>> UpdateConversation(string id,string userprompt)
         {
@@ -102,12 +107,54 @@ namespace DocSumController.Controllers
 
             return extractedSubtopics;
         }
-
         private static bool IsPotentialSubtopic(string line)
         {
             // Adjust these criteria based on your specific needs
-            return line == line.ToUpper() || line.StartsWith("*") || line.StartsWith("-") || line.Count(Char.IsWhiteSpace) <= 2;
+            return
+                !string.IsNullOrWhiteSpace(line) && 
+                (line == line.ToUpper() ||
+                   line.StartsWith("*") ||
+                   line.StartsWith("-") ||
+                   line.Count(char.IsWhiteSpace) <= 3 ||
+                   ContainsBoldText(line));
         }
+
+        private static bool ContainsBoldText(string line)
+        {
+            // This is a simplified approach to check for bold text based on font style
+            // It assumes that bold text might have different font sizes compared to regular text
+            // Adjust the threshold as needed based on the font sizes in your PDFs
+            float fontSizeThreshold = 10.0f; // Adjust this value based on your PDFs
+
+            // Iterate through characters to check if any have bold-like characteristics
+            foreach (char c in line)
+            {
+                // Example: GetFont() function should retrieve font information from PDF
+                // Adjust this part based on the PDF library you're using
+                var font = GetFont(c); // Example function, replace with actual code to get font
+
+                if (font != null && font.Size >= fontSizeThreshold)
+                {
+                    // If the font size exceeds the threshold, consider it bold
+                    return true;
+                }
+            }
+
+            // No bold-like characteristics found
+            return false;
+        }
+
+        // Example function to get font information (replace with actual code)
+        private static Font GetFont(char c)
+        {
+            // Example function to retrieve font information from PDF
+            // Replace with actual implementation based on the PDF library you're using
+            // This is just a placeholder function
+            // You should implement the logic to get font information from the PDF library you're using
+            // and return the Font object corresponding to the character 'c'
+            return null;
+        }
+
 
     }
 }

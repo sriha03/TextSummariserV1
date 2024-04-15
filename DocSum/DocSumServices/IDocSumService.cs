@@ -15,6 +15,7 @@ namespace DocSumServices
         public Task<List<string>> ParseDocument(string filePath);
         public Task<ConversationModel> SummarizeDocument(string filePath);
         public Task<ConversationModel> GetConversation(string id);
+        public Task<List<ConversationModel>> GetConversationAll();
         public Task<ConversationModel> UpdateConversation(string id, string userprompt);
 
     }

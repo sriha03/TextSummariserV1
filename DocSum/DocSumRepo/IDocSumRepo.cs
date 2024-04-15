@@ -13,6 +13,7 @@ namespace DocSumRepository
         public void ParseDocument(string filePath);
         public Task<ConversationModel> StoreConversation(List<string> pages, List<string> summaries,string filePath);
         public Task<ConversationModel> GetConversation(string id);
+        public Task<List<ConversationModel>> GetConversationAll();
         public Task<ConversationModel> UpdateConversation(string id, ConversationModel conversation);
     }
 
