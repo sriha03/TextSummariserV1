@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\DocSum",
-    "\\DocSum\\DocSum",
-    "\\DocSum\\DocSumRepo",
-    "\\DocSum\\DocSumServices",
-    "\\DocSum\\DocSum\\Controllers",
-    "\\DocSum\\TextSummarizer"
+    ""
   ],
-  "SelectedNode": "\\DocSum\\DocSumRepo",
+  "SelectedNode": "\\DocSum.sln",
   "PreviewInSolutionExplorer": false
 }

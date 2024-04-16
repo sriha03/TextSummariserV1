@@ -106,7 +106,7 @@ namespace DocSumController.Controllers
         private static bool IsPotentialSubtopic(string line)
         {
             // Adjust these criteria based on your specific needs
-            return line == line.ToUpper() || line.StartsWith("*") || line.StartsWith("-") || line.Count(Char.IsWhiteSpace) <= 2;
+            return line == line.ToUpper() || line.StartsWith("*") || line.StartsWith("-") || line.Count(Char.IsWhiteSpace)  <= 2;
         }
 
     }

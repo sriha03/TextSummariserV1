@@ -201,6 +201,7 @@ namespace DocSumServices
             return await _docSumRepo.GetConversation(id);
         }
 
+
         public async Task<ConversationModel> UpdateConversation(string id, string userprompt)
         {
             ConversationModel conversation = await _docSumRepo.GetConversation(id);
@@ -210,6 +211,8 @@ namespace DocSumServices
             await _docSumRepo.UpdateConversation(id, conversation);
             return conversation;
         }
+
+
         private async Task<string> GenerateBotReply(string userPrompt, string content, string previousConversation)
         {
             // Concatenate user prompt, content, and previous conversation for context
