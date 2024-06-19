@@ -1,4 +1,4 @@
-import React , { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 
 function Home() {
@@ -43,12 +43,35 @@ function Home() {
     }
   };
 
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.post('http://localhost:5298/DocSum/GetConverstionAll', {}, {
+      headers: {
+        'Accept': 'text/plain'
+      }
+    })
+      .then(response => {
+        setData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+
   return (
     <>
       <header className="flex h-16 w-full shrink-0 items-center px-4 md:px-6 bg-gray-100 dark:bg-gray-900 mb-4">
         <h1 className="text-lg font-semibold mx-auto">Text Summarizer</h1>
       </header>
-      <div className="grid w-full max-w-100 gap-6 px-4">
+      <div className='flex'>
+      <div className='bg-gray-100 dark:bg-gray-900 w-[300px] h-screen overflow-y-auto'>
+  {data.map(item => (
+    <button className ='p-4 block'  key={item.id}>{item.docUrl.substring(9, item.docUrl.length - 4)}</button>
+  ))}
+</div>
+        <div className="grid w-full max-w-100 gap-6 px-4">
         <div className="grid grid-cols-2 gap-6">
           {/* Input section */}
           <div className="rounded-lg border border-gray-200 dark:border-gray-800 w-full">
@@ -113,6 +136,7 @@ function Home() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

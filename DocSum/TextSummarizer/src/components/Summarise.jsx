@@ -1,46 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const FileUploadComponent = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [uploadStatus, setUploadStatus] = useState('');
+function App() {
+  const [responseData, setResponseData] = useState(null);
 
-  // Function to handle file selection
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
-
-  // Function to handle file upload
-  const handleFileUpload = async () => {
-    try {
-      // Create FormData object and append the selected file
-      const formData = new FormData();
-      formData.append('file', selectedFile);
-
-      // Make a POST request to the server
-      const response = await axios.post('http://localhost:5298/DocSum/uploadpdf', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
+  useEffect(() => {
+    axios.post('http://localhost:5298/DocSum/GetConverstionAll', {
+      headers: {
+        'Accept': 'text/plain'
+      }
+    })
+      .then(response => {
+        setResponseData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
       });
-      console.log(response.data.summaries);
-
-      // Update upload status based on the response
-      setUploadStatus('File uploaded successfully');
-    } catch (error) {
-      // Handle error if upload fails
-      console.error('Error uploading file:', error);
-      setUploadStatus('Failed to upload file');
-    }
-  };
+  }, []);
 
   return (
     <div>
-      <input type="file" onChange={handleFileChange} />
-      <button onClick={handleFileUpload}>Upload</button>
-      {uploadStatus && <p>{uploadStatus}</p>}
+      {responseData && (
+        <pre>{JSON.stringify(responseData, null, 2)}</pre>
+      )}
     </div>
   );
-};
+}
 
-export default FileUploadComponent;
+export default App;

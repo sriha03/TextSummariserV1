@@ -200,6 +200,10 @@ namespace DocSumServices
         {
             return await _docSumRepo.GetConversation(id);
         }
+        public async Task<List<ConversationModel>> GetConversationAll()
+        {
+            return await _docSumRepo.GetConversationAll();
+        }
 
 
         public async Task<ConversationModel> UpdateConversation(string id, string userprompt)
