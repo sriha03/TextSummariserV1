@@ -21,13 +21,7 @@ builder.Services.AddScoped<IDocSumRepo, DocSumRepo>();
 var configuration = builder.Configuration;
 
 // Register DocSumService
-builder.Services.AddScoped<IDocSumService>((provider) =>
-{
-    var textAnalyticsEndpoint = configuration["TextAnalytics:Endpoint"];
-    var textAnalyticsKey = configuration["TextAnalytics:Key"];
-    var docSumRepo = provider.GetRequiredService<IDocSumRepo>();
-    return new DocSumService(docSumRepo, textAnalyticsEndpoint, textAnalyticsKey);
-});
+builder.Services.AddScoped<IDocSumService, DocSumService>();
 
 // Register CosmosClient
 builder.Services.AddSingleton<CosmosClient>((provider) =>

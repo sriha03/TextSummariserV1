@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace common.model
 {
-    public class ConversationModel
+    public class FileResponseModel
     {
-        public ConversationModel()
+        public FileResponseModel()
         {
             Blob = new FileModel();
         }
-        public string id { get; set; }
-        public string ConKey { get; set; }
-        public string Conv { get; set; }
-        public List<string> Summaries { get; set; }
+        public string? Status { get; set; }
+        public bool? Error { get; set; }
+
         public FileModel Blob { get; set; }
     }
 }
