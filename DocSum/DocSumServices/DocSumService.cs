@@ -56,9 +56,9 @@ namespace DocSumServices
                 };
             }
         }
-        public async Task<ConversationModel> NewChat(FileModel blob)
+        public async Task<ConversationModel> NewChat(FileModel blob,SummaryModel summary)
         {
-            return await _docSumRepo.CreateNewConversation(new List<string>(), blob);
+            return await _docSumRepo.CreateNewConversation(summary, blob);
         }
 
 

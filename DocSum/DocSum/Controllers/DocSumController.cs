@@ -22,7 +22,7 @@ namespace DocSumController.Controllers
             _docSumService = docSumService;
         }
         [HttpPost("NewChat")]
-        public async Task<ActionResult<ConversationModel>> NewChat(IFormFile file)
+        public async Task<ActionResult<ConversationModel>> NewChat(IFormFile file, [FromForm] SummaryModel summary)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace DocSumController.Controllers
                     return BadRequest("No file uploaded");
                 var blobResult = await _docSumService.UploadAsync(file);
 
-                var conv = await _docSumService.NewChat(blobResult.Blob);
+                var conv = await _docSumService.NewChat(blobResult.Blob, summary);
                 return conv;
             }
             catch (Exception ex)

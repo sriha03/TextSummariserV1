@@ -23,7 +23,7 @@ namespace DocSumRepository
         {
             _cosmosClient = cosmosClient;
         }
-        public async Task<ConversationModel> CreateNewConversation(List<string> summaries, FileModel blob)
+        public async Task<ConversationModel> CreateNewConversation(SummaryModel summaries, FileModel blob)
         {
             var container = _cosmosClient.GetContainer(DatabaseId, ContainerId);
 

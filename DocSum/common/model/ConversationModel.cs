@@ -11,11 +11,14 @@ namespace common.model
         public ConversationModel()
         {
             Blob = new FileModel();
+            Summaries = new SummaryModel();
+            Summaries.original_summary = "";
+            Summaries.further_summary = "";
         }
         public string id { get; set; }
         public string ConKey { get; set; }
         public string Conv { get; set; }
-        public List<string> Summaries { get; set; }
+        public SummaryModel Summaries { get; set; }
         public FileModel Blob { get; set; }
     }
 }
