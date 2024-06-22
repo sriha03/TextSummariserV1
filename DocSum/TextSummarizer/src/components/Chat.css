@@ -1,0 +1,41 @@
+﻿.chat-window {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.chat-message {
+    display: flex;
+    margin: 10px 0;
+}
+
+    .chat-message.assistant {
+        justify-content: flex-start;
+    }
+
+    .chat-message.user {
+        justify-content: flex-end;
+    }
+
+.message-content {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #f1f1f1;
+}
+
+.chat-message.user .message-content {
+    background-color: #007bff;
+    color: white;
+}
+
+
+.chat-input {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 90%;
+
+    .btn{
+            background-color: aqua;
+        }
+}

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Worker, Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { PiNotePencilFill } from "react-icons/pi";
+import Home2 from './Home2';
 
 function GoogleDocsViewer({ fileUrl }) {
     return (
@@ -20,11 +21,12 @@ function Home() {
     const [fileURL, setFileURL] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [uploadStatus, setUploadStatus] = useState('');
-    const [summaries, setSummaries] = useState('');
     const [allConversations, setAllConversations] = useState([]);
     const [selectedConversation, setSelectedConversation] = useState(null);
     const [preference, setPreference] = useState('short'); 
-
+    const changeSelectedConversation = (conversation) => {
+        setSelectedConversation(conversation);
+    }
     const handleSelectConv = (id) => {
         axios.post(`https://localhost:7103/DocSum/GetConverstion?id=${id}`, {
             headers: {
@@ -65,6 +67,7 @@ function Home() {
             const summary=response2.data
             formData.append('original_summary', summary.original_summary);
             formData.append('further_summary', summary.further_summary);
+            formData.append('parsed_text', summary.parsed_text);
             for (let pair of formData.entries()) {
                 console.log(pair[0] + ': ' + pair[1]);
             }
@@ -225,6 +228,7 @@ function Home() {
                             </div>
                         </div>
                     )}
+                    <Home2 selectedConversation={selectedConversation} changeSelectedConversation={changeSelectedConversation} />
                 </div>
             </div>
         </>

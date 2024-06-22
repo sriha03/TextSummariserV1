@@ -10,6 +10,7 @@ namespace common.model
     {
         public string original_summary { get; set; }
         public string further_summary { get; set; }
+        public string parsed_text { get; set; }
 
     }
 }

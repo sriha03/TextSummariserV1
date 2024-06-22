@@ -74,7 +74,8 @@ namespace DocSumServices
         public async Task<ConversationModel> UpdateConversation(string id, string userPrompt, string botReply)
         {
             ConversationModel conversation = await _docSumRepo.GetConversation(id);
-            conversation.Conv += $"UserPrompt: {userPrompt};BotReply: {botReply};";
+            conversation.AppendMessage("user", userPrompt);
+            conversation.AppendMessage("assistant", botReply);
             await _docSumRepo.UpdateConversation(id, conversation);
             return conversation;
         }

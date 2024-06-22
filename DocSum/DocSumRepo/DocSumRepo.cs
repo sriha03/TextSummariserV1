@@ -32,7 +32,7 @@ namespace DocSumRepository
                 id = Guid.NewGuid().ToString(),
                 ConKey = Guid.NewGuid().ToString(),
                 Summaries = summaries,
-                Conv = "",
+                Conv = [],
                 Blob = blob
             };
 
@@ -105,7 +105,7 @@ namespace DocSumRepository
             catch (Exception ex)
             {
                 conversation.id = ex.Message;
-                conversation.Conv = ex.StackTrace;
+                conversation.ConKey = ex.StackTrace;
                 return conversation;
             }
         }
