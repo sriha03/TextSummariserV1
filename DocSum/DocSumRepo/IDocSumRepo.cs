@@ -13,6 +13,7 @@ namespace DocSumRepository
         public Task<ConversationModel> GetConversation(string id);
         public Task<List<ConversationModel>> GetAllConversation();
         public Task<ConversationModel> UpdateConversation(string id, ConversationModel conversation);
+        public Task<bool> DeleteConversation(string id,string partitionKey);
     }
 
 }

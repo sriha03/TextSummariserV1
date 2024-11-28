@@ -12,20 +12,35 @@ namespace common.model
         public ConversationModel()
         {
             Blob = new FileModel();
-            Summaries = new SummaryModel();
-            Summaries.original_summary = "";
-            Summaries.further_summary = "";
-            Summaries.parsed_text = "";
+            Summaries = new SummaryModel
+            {
+                original_summary = "",
+                further_summary = "",
+                parsed_text = ""
+            };
+            Conv = new List<ConvModel>();
+            LastUpdated = DateTime.UtcNow;
         }
         public string id { get; set; }
         public string ConKey { get; set; }
-        public List<Dictionary<string, string>> Conv { get; set; }
+        public List<ConvModel> Conv { get; set; }
         public SummaryModel Summaries { get; set; }
         public FileModel Blob { get; set; }
-
+        public DateTime LastUpdated { get; set; }
         public void AppendMessage(string role, string content)
         {
-            Conv.Add(new Dictionary<string, string> { { "role", role }, { "content", content } });
+            Conv.Add(new ConvModel
+            {
+                id = (Conv.Count + 1).ToString(),
+                role = role,
+                content = content
+            });
         }
+    }
+    public class ConvModel
+    {
+        public string id { get; set; }
+        public string role { get; set; }
+        public string content { get; set; }
     }
 }

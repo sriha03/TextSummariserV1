@@ -1,6 +1,7 @@
 ﻿using com.sun.jndi.dns;
 using common.model;
 using Microsoft.Azure.Cosmos;
+using Microsoft.Azure.Cosmos.Serialization.HybridRow.Schemas;
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace DocSumRepository
 
             var conversation = new ConversationModel
             {
+                LastUpdated = DateTime.UtcNow,
                 id = Guid.NewGuid().ToString(),
                 ConKey = Guid.NewGuid().ToString(),
                 Summaries = summaries,
@@ -110,6 +112,22 @@ namespace DocSumRepository
             }
         }
 
+        public async Task<bool> DeleteConversation(string id,string partitionKey)
+        {
+            var container = _cosmosClient.GetContainer(DatabaseId, ContainerId);
+            try
+            {
+                var response = await container.DeleteItemAsync<ConversationModel>(id, new PartitionKey(partitionKey));
+
+                // Check if the delete operation was successful
+                return response.StatusCode == System.Net.HttpStatusCode.NoContent;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 
 }

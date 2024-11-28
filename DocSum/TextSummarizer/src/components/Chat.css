@@ -9,7 +9,7 @@
     margin: 10px 0;
 }
 
-    .chat-message.assistant {
+    .chat-message.bot {
         justify-content: flex-start;
     }
 
@@ -31,11 +31,12 @@
 
 .chat-input {
     position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    width: 90%;
-
+    width: 70%;
+    left: 25%;
+    bottom: 1%;
+    border: 1px solid black !important;
+    border-radius: 5px;
     .btn{
-            background-color: aqua;
-        }
+        background-color: aqua;
+    }
 }

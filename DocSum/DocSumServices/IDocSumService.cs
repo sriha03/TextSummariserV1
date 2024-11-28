@@ -16,6 +16,7 @@ namespace DocSumServices
         public Task<ConversationModel> GetConversation(string id);
         public Task<List<ConversationModel>> GetAllConversation();
         public Task<ConversationModel> UpdateConversation(string id, string userPrompt, string botReply);
+        public Task<bool> DeleteConversation(string id, string partitionKey);
 
     }
 }

@@ -54,5 +54,8 @@ namespace DocSumController.Controllers
         {
             return await _docSumService.UpdateConversation(id, userPrompt, botReply);
         }
+
+        [HttpPost("DeleteConversation")]
+        public async Task<bool> DeleteConversation(string id, string partitionKey);
     }
 }

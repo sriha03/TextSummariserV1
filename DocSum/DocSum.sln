@@ -35,6 +35,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TextSummarizer", "TextSumma
 		SlnRelativePath = "TextSummarizer\"
 	EndProjectSection
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "DocumentSummaryFlaskBackend", "DocumentSummaryFlaskBackend\DocumentSummaryFlaskBackend.pyproj", "{35DB9553-1FF9-4CF5-94CB-7C67DE2E00B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{ABFAF8C2-ED68-4154-9A7B-A8C6E3C1581D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABFAF8C2-ED68-4154-9A7B-A8C6E3C1581D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{ABFAF8C2-ED68-4154-9A7B-A8C6E3C1581D}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{35DB9553-1FF9-4CF5-94CB-7C67DE2E00B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35DB9553-1FF9-4CF5-94CB-7C67DE2E00B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35DB9553-1FF9-4CF5-94CB-7C67DE2E00B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35DB9553-1FF9-4CF5-94CB-7C67DE2E00B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

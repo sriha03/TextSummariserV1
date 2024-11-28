@@ -1,68 +1,74 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState, useContext } from 'react';
 import ChatWindow from './ChatWindow';
 import './Chat.css';
 import { BsFillSendFill } from "react-icons/bs";
+import { chatContext } from '../context/chatContext';
+import axios from 'axios'
 
-
-function Home2({ selectedConversation, changeSelectedConversation }) {
-    const [chatData, setChatData] = useState([
-        {
-            "role": "user",
-            "content": "hi"
-        },
-        {
-            "role": "assistant",
-            "content": "hello"
-        },
-        {
-            "role": "user",
-            "content": "hi1"
-        },
-        {
-            "role": "assistant",
-            "content": "hello1"
-        }
-    ]);
+function Home2() {
+    let [, fetchAllConversations, selectedConversation,,getBotReply] = useContext(chatContext)
+    const [chatData, setChatData] = useState([]);
+    console.log(selectedConversation)
     /*const rawChatData = "user_prompt:abcd;bot_reply:efgh;user_prompt:Hello;bot_reply:Hi there!;"; // Example data*/
     const [input, setInput] = useState("");
 
-    /* useEffect(() => {
-    }, []);*/
+    useEffect(() => {
+        setChatData(selectedConversation?.conv)
+    }, [selectedConversation]);
 
     const handleSendMessage = async () => {
         const userMessage = input;
-        const botReply = "hi"//await getBotReply(userMessage); // Function to get bot reply
+        console.log(input)
+        const botReply = await getBotReply(chatData,input); // Function to get bot reply
+        const response = await axios.post(
+            'http://localhost:5298/DocSum/UpdateConversation',
+            null,
+            {
+                params: {
+                    id: selectedConversation.id,
+                    userPrompt: userMessage,
+                    botReply: botReply
+                }
+            }
+        );
+        setChatData(response.data.conv)
+        //let newChatData=[]
+        //// Format data for display
+        //if (response != undefined && selectedConversation != undefined) {
+        //    newChatData = [
+        //        ...chatData,
+        //        { id: chatData.length + 1, role: 'user', content: input },
+        //        { id: chatData.length + 2, role: 'bot', content: botReply }
+        //    ];
+        //} else {
+        //    newChatData = [
+        //        { id: 0, role: 'user', content: input },
+        //        { id: 1, role: 'bot', content: botReply }
+        //    ]
+        //}
 
-        // Format data for display
-        const newChatData = [
-            ...chatData,
-            { id: chatData.length + 1, sender: 'user', message: userMessage },
-            { id: chatData.length + 2, sender: 'assistant', message: botReply }
-        ];
-
-        setChatData(newChatData);
+        //setChatData(newChatData);
+        fetchAllConversations();
         setInput("");
     };
 
-    const getBotReply = async (message) => {
-        // Function to get bot reply (for demo, returning a static reply)
-        // Replace this with actual bot integration logic
-        return "This is a bot reply to: " + message;
-    };
+    
 
     return (
-        <div className="App">
+        <div className="Home2">
             <ChatWindow chatData={chatData} />
-            <div className="chat-input input-group mb-3">
-                <input
-                    type="text"
-                    className="form-control"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="Type your message..."
-                />
-                <div className="input-group-append">
-                    <button className="btn " onClick={handleSendMessage}><BsFillSendFill /></button>
+            <div className="bg-white">
+                <div className="chat-input input-group mb-3">
+                    <input
+                        type="text"
+                        className="form-control"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder="Type your message..."
+                    />
+                    <div className="input-group-append">
+                        <button className="btn h-full" onClick={handleSendMessage}><BsFillSendFill /></button>
+                    </div>
                 </div>
             </div>
 
